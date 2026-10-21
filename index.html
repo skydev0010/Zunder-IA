@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#09090b" />
+  <title>Zunder IA</title>
+
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+  <!-- MODAL DE AVISO -->
+  <div class="alpha-modal" id="alpha-modal">
+    <div class="alpha-modal__content">
+      
+      <button class="alpha-modal__close" id="btn-close-alpha" aria-label="Fechar aviso">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <!-- Banner -->
+      <div class="alpha-modal__banner">
+        <img src="zunder.png" alt="Banner Zunder IA" />
+      </div>
+
+      <!-- Texto -->
+      <div class="alpha-modal__body">
+        <h2>Zunder IA</h2>
+        <p>O Zunder IA ainda está em fase de desenvolvimento e, por isso, algumas funcionalidades podem apresentar instabilidades, erros ou comportamentos inesperados. Esta é uma versão experimental, sujeita a mudanças e melhorias constantes.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- APLICAÇÃO PRINCIPAL -->
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar">
+      <header class="sidebar__head">
+        <img src="zunder_img.png" alt="Zunder" class="sidebar-brand-img" />
+        <button class="icon-btn sidebar__close" id="sidebar-close" aria-label="Fechar menu">
+          <svg class="icon"><use href="#i-x" /></svg>
+        </button>
+      </header>
+
+      <div class="sidebar__actions">
+        <button class="nav-item" id="btn-new" type="button">
+          <svg class="icon icon--sm"><use href="#i-plus" /></svg>
+          <span>Novo chat</span>
+        </button>
+      </div>
+
+      <label class="search">
+        <svg class="icon icon--sm"><use href="#i-search" /></svg>
+        <input id="search" type="search" placeholder="Pesquisar..." />
+      </label>
+
+      <nav class="history" id="history" aria-label="Histórico"></nav>
+
+      <footer class="sidebar__foot">
+        <button class="user" id="user-btn" aria-haspopup="menu" aria-expanded="false">
+          <span class="user__avatar" id="user-avatar">U</span>
+          <span class="user__info">
+            <span class="user__name" id="user-name">Usuário#01</span>
+            <span class="user__plan">Conta Local</span>
+          </span>
+        </button>
+      </footer>
+
+      <div class="user-menu" id="user-menu" role="menu" hidden>
+        <div class="user-menu__head">
+          <div class="user-menu__avatar" id="menu-avatar">U</div>
+          <p class="user-menu__label">Perfil deste dispositivo</p>
+          <p class="user-menu__name" id="menu-user-name">Usuário#01</p>
+        </div>
+        <button class="user-menu__item user-menu__item--danger" id="btn-clear-all" type="button" role="menuitem">
+          <svg class="icon icon--sm"><use href="#i-trash" /></svg>
+          Limpar todas as conversas
+        </button>
+      </div>
+    </aside>
+
+    <div class="overlay" id="overlay" hidden></div>
+
+    <main class="main">
+      <header class="header">
+        <button class="icon-btn header__menu" id="sidebar-open" aria-label="Abrir menu">
+          <svg class="icon"><use href="#i-menu" /></svg>
+        </button>
+        <div class="header__title">
+          <h1 id="chat-title">Novo chat</h1>
+          <span id="chat-sub">Zunder IA</span>
+        </div>
+      </header>
+
+      <div class="scroll" id="scroll">
+        <div class="container">
+          <section class="welcome" id="welcome">
+            <h2 class="welcome__title">Como posso ajudar?</h2>
+            <p class="welcome__text" id="welcome-hello">Pergunte, escreva, resuma ou programe.</p>
+
+            <div class="suggestions" id="suggestions">
+              <button class="suggestion" data-prompt="Explique o que é buraco negro de forma simples.">
+                <svg class="icon icon--sm"><use href="#i-spark" /></svg> Explique algo para mim
+              </button>
+              <button class="suggestion" data-prompt="Escreva um código Python para calcular a sequência de Fibonacci.">
+                <svg class="icon icon--sm"><use href="#i-code" /></svg> Ajude com programação
+              </button>
+              <button class="suggestion" data-prompt="Escreva um e-mail profissional pedindo aumento de salário.">
+                <svg class="icon icon--sm"><use href="#i-text" /></svg> Escreva um texto
+              </button>
+              <button class="suggestion" data-prompt="Me dê 5 dicas para aumentar a produtividade no trabalho.">
+                <svg class="icon icon--sm"><use href="#i-list" /></svg> Resuma um conteúdo
+              </button>
+            </div>
+          </section>
+
+          <div class="messages" id="messages" role="log" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="composer">
+        <form class="composer__form" id="form">
+          <div class="composer__box">
+            <textarea id="input" class="composer__input" rows="1" placeholder="Envie uma mensagem para a Zunder..."></textarea>
+            <button type="submit" class="composer__send" id="send" disabled aria-label="Enviar">
+              <svg class="icon icon--sm"><use href="#i-send" /></svg>
+            </button>
+          </div>
+          <p class="composer__hint">A Zunder pode cometer erros. Confira informações importantes.</p>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <svg class="svg-sprite" aria-hidden="true">
+    <defs>
+      <symbol id="i-plus"     viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-search"   viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20.2 20.2 16.6 16.6"/></symbol>
+      <symbol id="i-send"     viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></symbol>
+      <symbol id="i-menu"     viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-x"        viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-message"  viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-4-.9L3 21l1.9-4.9A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5z"/></symbol>
+      <symbol id="i-spark"    viewBox="0 0 24 24"><path d="M12 3.5l1.7 4.8 4.8 1.7-4.8 1.7L12 16.5l-1.7-4.8L5.5 10l4.8-1.7z"/></symbol>
+      <symbol id="i-code"     viewBox="0 0 24 24"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/></symbol>
+      <symbol id="i-text"     viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+      <symbol id="i-list"     viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+      <symbol id="i-trash"    viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14"/></symbol>
+    </defs>
+  </svg>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html> 
